@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using MainMenuFramework.Controls;
 using Microsoft.Xna.Framework;
@@ -9,12 +9,12 @@ namespace MainMenuFramework.States
 {
 	public class MenuState : State
 	{
-		private readonly List<Component> _components;
+		private readonly List<IDrawable> _components;
 
 		public MenuState(Game game, GraphicsDevice graphics, ContentManager content) : base(game, graphics, content)
 		{
-			var buttonTexture = _content.Load<Texture2D>("Controls/button");
-			var buttonFont = _content.Load<SpriteFont>("Fonts/MainMenu");
+			var buttonTexture = Content.Load<Texture2D>("Controls/button");
+			var buttonFont = Content.Load<SpriteFont>("Fonts/MainMenu");
 			;
 			var newButton = new Button(buttonTexture, buttonFont, new Vector2(300, 200), "Quit Game");
 
@@ -22,17 +22,17 @@ namespace MainMenuFramework.States
 
 			newButton.Click += QuitGameClicked;
 			newGameButton.Click += NewGameClicked;
-            _components = new List<Component>() { newButton, newGameButton };
+            _components = new List<IDrawable>() { newButton, newGameButton };
 		}
 
 		private void NewGameClicked(object sender, EventArgs e)
 		{
-			_game.ChangeState(new GameState(_game, _graphics, _content));
+			//_game.ChangeState(new GameState(_game, _graphics, _content));
 		}
 
 		private void QuitGameClicked(object sender, EventArgs e)
 		{
-			_game.Exit();
+			Game.Exit();
 		}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -52,4 +52,4 @@ namespace MainMenuFramework.States
 			_components.ForEach(c => c.Update(gameTime));
 		}
 	}
-}
+}*/

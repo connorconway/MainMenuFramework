@@ -6,33 +6,33 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace MainMenuFramework.Controls
 {
-	public class Button : Component
+	public class Button : IUpdatable, IDrawable
 	{
 		private readonly Texture2D _texture;
-		private readonly SpriteFont _font;
-		private readonly Vector2 _fontPosition;
-		private readonly Color _fontColor = Color.White;
-		private readonly string _text;
-		private Rectangle _boundingBox;
+	    private readonly Text _text;
+	    private Rectangle _boundingBox;
 
-		public event EventHandler Click;
+	    public event EventHandler Click;
 
-		public Button(Texture2D texture, SpriteFont font, Vector2 position, string text)
+		public Button(Texture2D texture, Vector2 position)
 		{
 			_texture = texture;
-			_font = font;
-			_text = text;
-			_fontPosition = new Vector2(_boundingBox.X + (_boundingBox.Width / 2) - (_font.MeasureString(_text).X / 2), _boundingBox.Y + (_boundingBox.Height / 2) - (_font.MeasureString(_text).Y / 2));
 			_boundingBox = new Rectangle((int)position.X, (int)position.Y, _texture.Width, _texture.Height);
 		}
 
-		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+	    public Button(Texture2D texture, Vector2 position, Text text) : this(texture, position)
+	    {
+	        _text = text;
+	        _text.MoveToCenter(_boundingBox);
+	    }
+
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			spriteBatch.Draw(_texture, _boundingBox, Color.White);
-			spriteBatch.DrawString(_font, _text, _fontPosition, _fontColor);
+			_text?.Draw(gameTime, spriteBatch);
 		}
 
-		public override void Update(GameTime gameTime)
+		public void Update(GameTime gameTime)
 		{
 			TouchPanel.GetState()
 				.Where(t => t.State == TouchLocationState.Pressed)

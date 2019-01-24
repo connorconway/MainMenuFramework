@@ -6,19 +6,19 @@ namespace MainMenuFramework.States
 {
 	public abstract class State
 	{
-		protected ContentManager _content;
-		protected GraphicsDevice _graphics;
-		protected Game _game;
+		protected ContentManager Content;
+		protected GraphicsDevice Graphics;
+		protected Game Game;
 
-		public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
-		public abstract void PostUpdate(GameTime gameTime);
-		public abstract void Update(GameTime gameTime);
-
-		public State(Game game, GraphicsDevice graphics, ContentManager content)
+	    protected State(Game game, GraphicsDevice graphics, ContentManager content)
 		{
-			_game = game;
-			_graphics = graphics;
-			_content = content;
+			Game = game;
+			Graphics = graphics;
+			Content = content;
 		}
+
+	    public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+	    public abstract void Update(GameTime gameTime);
+	    public abstract void PostUpdate(GameTime gameTime);
 	}
 }
